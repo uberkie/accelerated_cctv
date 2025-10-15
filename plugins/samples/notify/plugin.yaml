@@ -1,0 +1,19 @@
+id: samples.notify
+name: Sample Notify Plugin
+version: 0.1.0
+type: notify
+description: "Sample notification plugin demonstrating webhook delivery and retry logic. Python runtime with optional Go worker."
+entrypoint: main:NotifyPlugin
+capabilities:
+  - webhook
+  - retry
+config_schema:
+  type: object
+  properties:
+    max_retries:
+      type: integer
+      default: 3
+required: []
+gpu_hints:
+  prefer: [nvidia]
+  min_memory_mb: 512

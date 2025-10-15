@@ -1,0 +1,23 @@
+id: transcode.gstreamer_zero_copy
+name: GStreamer Zero-Copy Transcode Plugin (prototype)
+version: 0.1.0
+type: transcode
+description: "Prototype plugin showing a GStreamer NVDEC -> native compute worker -> NVENC zero-copy pipeline. This is a scaffold; system-specific native code required for full zero-copy." 
+entrypoint: README:README
+capabilities:
+  - decode
+  - passthrough_inference
+  - encode
+config_schema:
+  type: object
+  properties:
+    gst_rtsp_location:
+      type: string
+      default: "rtsp://camera.local/stream"
+    worker_socket:
+      type: string
+      default: "/tmp/zero_copy_worker.sock"
+required: []
+gpu_hints:
+  prefer: [nvidia]
+  min_memory_mb: 2048

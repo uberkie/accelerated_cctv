@@ -1,0 +1,4 @@
+numpy
+Pillow
+Flask
+pycuda; platform_system != 'Windows'

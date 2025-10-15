@@ -1,0 +1,20 @@
+id: samples.onvif
+name: Sample ONVIF Connector
+version: 0.1.0
+type: ingestion
+description: "Sample ONVIF discovery/connector plugin (demo). Python runtime with optional Go compute helper."
+entrypoint: main:Plugin
+capabilities:
+  - discover
+  - stream_profiles
+  - ptz
+config_schema:
+  type: object
+  properties:
+    poll_interval:
+      type: integer
+      default: 30
+required: []
+gpu_hints:
+  prefer: [nvidia, vaapi]
+  min_memory_mb: 2048
