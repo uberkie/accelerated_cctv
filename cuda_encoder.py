@@ -15,6 +15,7 @@ import sys
 import signal
 import numpy as np
 
+
 try:
     import gi
     gi.require_version("Gst", "1.0")
@@ -29,7 +30,7 @@ Gst.init(None)
 HAS_PYCUDA = False
 try:
     import pycuda.driver as cuda
-    import pycuda.autoinit  # noqa: F401
+    import pycuda.autoinit
     from pycuda.compiler import SourceModule
 
     HAS_PYCUDA = True
@@ -137,8 +138,8 @@ def on_new_sample(sink: 'Gst.AppSink') -> Gst.FlowReturn:
     try:
         if HAS_PYCUDA:
             # copy to device, run kernel, copy back (non-zero-copy demo)
-            dptr = cuda.driver.mem_alloc(arr.nbytes)
-            cuda.memcpy_htod(dptr, arr)
+            dptr = cuda.mem_alloc(arr.nbytes)
+            cuda.mem_alloc(dptr, arr)
             gpu_invert(dptr, arr.size)
             cuda.memcpy_dtoh(arr, dptr)
             dptr.free()

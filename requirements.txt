@@ -7,7 +7,12 @@ pycuda; platform_system != 'Windows'
 requests
 PyYAML
 pytest
-PyGObject
-
+# PyGObject and pycairo are provided by the OS on many distros and often
+# fail to build in a pure pip environment because they need system libraries
+# (cairo, gobject-introspection, etc). Install these via your package manager
+# (see docs/requirements.md) or uncomment below if you know your environment
+# can build them.
+# PyGObject
+# pycairo
 # Notes: some dependencies require system packages (GStreamer, GTK/GObject introspection,
 # NVIDIA drivers and CUDA for pycuda). See docs/requirements.md for install hints.

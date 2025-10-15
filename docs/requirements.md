@@ -18,6 +18,7 @@ The project's Python dependencies are listed in the repository root
 - PyYAML
 - pytest
 - PyGObject
+-  pycairo
 
 Install them in a virtualenv:
 
@@ -44,6 +45,7 @@ following on Debian/Ubuntu to cover common development needs:
 
 ```bash
 sudo apt update
+sudo apt install -y libcairo2-dev libgirepository1.0-dev pkg-config python3-dev gir1.2-gtk-3.0
 sudo apt install -y \
     build-essential \
     python3-dev \
@@ -60,6 +62,27 @@ sudo apt install -y \
     pkg-config \
     ffmpeg
 ```
+
+If you plan to install PyGObject / pycairo via pip (not recommended unless
+you know your environment can build C extensions), you must first install
+the native cairo and development headers. On Debian/Ubuntu the additional
+packages are:
+
+```bash
+sudo apt install -y libcairo2 libcairo2-dev pkg-config python3-gi python3-gi-cairo
+```
+
+In practice it's usually easiest to install `python3-gi` and `python3-gi-cairo`
+from the OS packages, which provide prebuilt wheels and the necessary
+typelibs for GStreamer bindings. Example:
+
+```bash
+sudo apt install -y python3-gi python3-gi-cairo gir1.2-gst-1.0
+```
+
+This prevents pip from attempting to build `pycairo` from source (which
+failed earlier in your environment because the `cairo` pkg-config/cmake
+dependency wasn't available).
 
 GPU / NVIDIA notes
 - Install NVIDIA driver and CUDA toolkit following NVIDIA's docs for your OS.
