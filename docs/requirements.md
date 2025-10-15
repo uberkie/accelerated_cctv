@@ -50,6 +50,8 @@ sudo apt install -y \
     python3-venv \
     libgirepository1.0-dev \
     gir1.2-gtk-3.0 \
+    gir1.2-gstreamer-1.0 \
+    gir1.2-gst-plugins-base-1.0 \
     libgstreamer1.0-dev \
     libgstreamer-plugins-base1.0-dev \
     gstreamer1.0-plugins-good \
