@@ -1,4 +1,5 @@
 numpy
 Pillow
 Flask
+PyGObject
 pycuda; platform_system != 'Windows'

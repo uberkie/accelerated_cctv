@@ -18,9 +18,10 @@ import numpy as np
 try:
     import gi
     gi.require_version("Gst", "1.0")
-    from gi.repository import Gst, GLib
+    gi.require_version("GstApp", "1.0")
+    from gi.repository import Gst, GstApp, GLib
 except Exception:
-    print("GStreamer (gi.repository.Gst) not available. Ensure PyGObject is installed.")
+    print("GStreamer (gi.repository.Gst/GstApp) not available. Ensure PyGObject is installed.")
     raise
 
 Gst.init(None)
@@ -126,7 +127,7 @@ def map_buffer_to_ndarray(buf: Gst.Buffer) -> np.ndarray:
     return arr
 
 
-def on_new_sample(sink: Gst.AppSink) -> Gst.FlowReturn:
+def on_new_sample(sink: GstApp.AppSink) -> Gst.FlowReturn:
     sample = sink.emit("pull-sample")
     if sample is None:
         return Gst.FlowReturn.OK
