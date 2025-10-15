@@ -2,3 +2,12 @@ numpy
 Pillow
 Flask
 pycuda; platform_system != 'Windows'
+
+# Additional runtime/testing dependencies discovered in codebase
+requests
+PyYAML
+pytest
+PyGObject
+
+# Notes: some dependencies require system packages (GStreamer, GTK/GObject introspection,
+# NVIDIA drivers and CUDA for pycuda). See docs/requirements.md for install hints.

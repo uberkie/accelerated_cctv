@@ -20,7 +20,7 @@ try:
     gi.require_version("Gst", "1.0")
     from gi.repository import Gst, GLib
 except Exception:
-    print("GStreamer (gi.repository.Gst) not available. Ensure PyGObject is installed.")
+    print("GStreamer (gi.repository.Gst) not available. Ensure PyGObject is installed.", file=sys.stderr)
     raise
 
 Gst.init(None)
@@ -126,7 +126,7 @@ def map_buffer_to_ndarray(buf: Gst.Buffer) -> np.ndarray:
     return arr
 
 
-def on_new_sample(sink: Gst.AppSink) -> Gst.FlowReturn:
+def on_new_sample(sink: 'Gst.AppSink') -> Gst.FlowReturn:
     sample = sink.emit("pull-sample")
     if sample is None:
         return Gst.FlowReturn.OK
@@ -137,7 +137,7 @@ def on_new_sample(sink: Gst.AppSink) -> Gst.FlowReturn:
     try:
         if HAS_PYCUDA:
             # copy to device, run kernel, copy back (non-zero-copy demo)
-            dptr = cuda.mem_alloc(arr.nbytes)
+            dptr = cuda.driver.mem_alloc(arr.nbytes)
             cuda.memcpy_htod(dptr, arr)
             gpu_invert(dptr, arr.size)
             cuda.memcpy_dtoh(arr, dptr)
